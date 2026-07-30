@@ -1,0 +1,28 @@
+
+.future{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 100vh;
+    background: var(--milk);
+}
+.future h1{
+    font-size: 3rem;
+    color: var(--brown);
+    text-align: center;
+}
+.future button{
+    border: none;
+    background: var(--brown);
+    padding: 15px 30px;
+    font-size:1.5rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.future button:hover{
+    background: var(--light-brown);
+}
