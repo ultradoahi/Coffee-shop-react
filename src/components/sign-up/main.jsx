@@ -1,5 +1,4 @@
 import style from "../sign-in/signup.module.css"
-import { supabase } from "../../supabase"
 import { useState } from "react";
 import { emailPattern } from "../../validation.js"
 import logo from "../../assets/mug-saucer-svg.svg"
@@ -26,21 +25,9 @@ function Main(){
                 setStatus("idle")
                 return;
             }
-    
-            setStatus("sending");
                 
-            const { data,error } = await supabase.auth.signUp({email,password});
-                
-            if (error) {
-                console.log(error.message);
-                setStatus("error");
-            } else if(data.user.identities === 0){
-                await supabase.auth.resetPasswordForEmail(email)
-                setStatus("success")
-            } else {
-                setStatus("success");
-                console.log("you have successfully created an account")
-            }
+            setStatus("success");
+            console.log("you have successfully created an account")
         };
     
         return(

@@ -1,5 +1,4 @@
 import style from "./signup.module.css"
-import { supabase } from "../../supabase"
 import { useState } from "react";
 import { emailPattern } from "../../validation.js"
 import logo from "../../assets/mug-saucer-svg.svg"
@@ -28,17 +27,8 @@ function Main(){
             return;
         }
 
-        setStatus("sending");
-            
-        const { data,error } = await supabase.auth.signInWithPassword({email,password});
-            
-        if (error) {
-            console.log(error.message);
-            setStatus("error");
-        } else {
-            setStatus("success");
-            console.log("you have been signed in successfully")
-        }
+        setStatus("success");
+        console.log("you have been signed in successfully")
     };
 
     return(
@@ -70,8 +60,8 @@ function Main(){
                     {status === "error" && <p className={style.error}>Either your email or password is wrong please check them and try again and if the problem continue click "Forgot your password?" link</p>}
                 </section>
                 <div className={style.btngroup}>
-                    <a href="/" onClick={(e) => {if(status === "sending"){e.preventDefault()}}}>Back</a>
-                    <button type="submit" disabled={status === "sending"}>{status === "sending" ? "Submitting" : "Submit"}</button>
+                    <a href="/">Back</a>
+                    <button type="submit" disabled={status === "sending"}>Submit</button>
                 </div>
             </section>
 
