@@ -1,35 +1,17 @@
 import style from "./signup.module.css"
-import { useState } from "react";
+import { useState, useRef, createRef } from "react";
 import { emailPattern } from "../../validation.js"
 import logo from "../../assets/mug-saucer-svg.svg"
 
 
 function Main(){
-    const [status,setStatus] = useState("idle");
-    const [isProperEmail,setProperEmail] = useState("unconfirmed");
-    const [isProperPassword,setProperPassword] = useState("unconfirmed");
+    const email = useRef(null);
+    const password = useRef(null);
     
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(e.target);
-        const email = formData.get("email");
-        const password = formData.get("password");
-
-        const emailValidation = emailPattern.test(email) ? "valid" : "invalid";
-        const passwordValidation = password.length >= 8 ? "valid" : "invalid";
-        
-        setProperEmail(emailValidation)
-        setProperPassword(passwordValidation)
-        
-        if(emailValidation !== "valid" || passwordValidation !== "valid"){
-            setStatus("idle")
-            return;
-        }
-
-        setStatus("success");
-        console.log("you have been signed in successfully")
-    };
+    function test(){
+        email.current.value = ''
+        password.current.value = ''
+    }
 
     return(
         <form className={style.form} onSubmit={handleSubmit}>
@@ -49,19 +31,19 @@ function Main(){
                 <section className={style.inputs}>
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" autoComplete="true" placeholder="someone@example.com"/>
-                        {isProperEmail !== "valid" && isProperEmail !== "unconfirmed" && <p className={style.error}>this is invalid email!</p>}
+                        <input type="email" ref={email} name="email" id="email" autoComplete="true" placeholder="someone@example.com"/>
+                        
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters"/>
-                        {isProperPassword !== "valid" && isProperPassword !== "unconfirmed" && <p className={style.error}>the password cant be less then 8 characters</p>}
+                        <input type="password" ref={password} name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters"/>
+                        
                     </div>
-                    <p style={{'color':'white'}}>I dont check if you have an account but it worth seeing how good this design is</p>
+                    <p>I dont check if you have an account but it worth seeing how good this design is</p>
                 </section>
                 <div className={style.btngroup}>
                     <a href="/">Back</a>
-                    <button type="button">Submit</button>
+                    <button type="button" onClick={test}>Submit</button>
                 </div>
             </section>
 

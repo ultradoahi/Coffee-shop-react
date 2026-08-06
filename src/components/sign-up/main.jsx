@@ -1,37 +1,21 @@
 import style from "../sign-in/signup.module.css"
-import { useState } from "react";
+import { useState, useRef, createRef, useEffect } from "react";
 import { emailPattern } from "../../validation.js"
 import logo from "../../assets/mug-saucer-svg.svg"
 
 function Main(){
-    const [status,setStatus] = useState("idle");
-    const [isProperEmail,setProperEmail] = useState("unconfirmed");
-    const [isProperPassword,setProperPassword] = useState("unconfirmed");
+    const name = useRef(null);
+    const email = useRef(null);
+    const password = useRef(null);
 
-    const handleSubmit = async (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(e.target);
-            const email = formData.get("email");
-            const password = formData.get("password");
-    
-            const emailValidation = emailPattern.test(email) ? "valid" : "invalid";
-            const passwordValidation = password.length >= 8 ? "valid" : "invalid";
-            
-            setProperEmail(emailValidation)
-            setProperPassword(passwordValidation)
-            
-            if(emailValidation === "invalid" || passwordValidation === "invalid"){
-                setStatus("idle")
-                return;
-            }
-                
-            setStatus("success");
-            console.log("you have successfully created an account")
-        };
+    function test(){
+        name.current.value = ''
+        email.current.value = ''
+        password.current.value = ''
+    }
     
         return(
-            <form className={style.form} onSubmit={handleSubmit}>
+            <form className={style.form}>
     
                 <section className={style.right}>
                     <header className={style.header}>
@@ -47,23 +31,23 @@ function Main(){
                     <section className={style.inputs}>
                         <div>
                             <label htmlFor="name">Full Name</label>
-                            <input type="text" name="name" id="name" placeholder="Optional"/>
+                            <input type="text" ref={name} name="name" id="name" placeholder="Optional"/>
                         </div>
                         <div>
                             <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="email" autoComplete="true" placeholder="someone@example.com" />
-                            {isProperEmail !== "valid" && isProperEmail !== "unconfirmed" && <p className={style.error}>this is invalid email!</p>}
+                            <input type="email" ref={email} name="email" id="email" autoComplete="true" placeholder="someone@example.com" />
+                            
                         </div>
                         <div>
                             <label htmlFor="password">Password</label>
-                            <input type="password" name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters" />
-                            {isProperPassword !== "valid" && isProperPassword !== "unconfirmed" && <p className={style.error}>the password cant be less then 8 characters</p>}
+                            <input type="password" ref={password} name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters" />
+                            
                         </div>
-                        {status === "success" && <p className={style.success}>You have succeded in creating a fake account that doesnt exist and your information didnt leave your machine so there is no worry</p>}
+                        <p>you will not create an account since this for review only but you can try</p>
                     </section>
                     <div className={style.btngroup}>
                         <a href="/" onClick={(e) => {if(status === "sending"){e.preventDefault()}}}>Back</a>
-                        <button type="button">Submit</button>
+                        <button type="button" onClick={test}>Submit</button>
                     </div>
                 </section>
     
