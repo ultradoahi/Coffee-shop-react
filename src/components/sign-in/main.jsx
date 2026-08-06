@@ -14,7 +14,7 @@ function Main(){
     }
 
     return(
-        <form className={style.form} onSubmit={handleSubmit}>
+        <form className={style.form}>
 
             <section className={style.right}>
                 <header className={style.header}>
