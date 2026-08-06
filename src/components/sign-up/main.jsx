@@ -59,12 +59,11 @@ function Main(){
                             <input type="password" name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters" />
                             {isProperPassword !== "valid" && isProperPassword !== "unconfirmed" && <p className={style.error}>the password cant be less then 8 characters</p>}
                         </div>
-                        {status === "error" && <p className={style.error}>Either your email or password is wrong please check them and try again and if the problem continue click "Forgot your password?" link</p>}
-                        {status === "success" && <p className={style.success}>You have succeded in creating an account, Confirmation email have been sended</p>}
+                        {status === "success" && <p className={style.success}>You have succeded in creating a fake account that doesnt exist and your information didnt leave your machine so there is no worry</p>}
                     </section>
                     <div className={style.btngroup}>
                         <a href="/" onClick={(e) => {if(status === "sending"){e.preventDefault()}}}>Back</a>
-                        <button type="submit" disabled={status === "sending"}>{status === "sending" ? "Submitting" : "Submit"}</button>
+                        <button type="button">Submit</button>
                     </div>
                 </section>
     

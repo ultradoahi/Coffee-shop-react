@@ -57,11 +57,11 @@ function Main(){
                         <input type="password" name="password" id="password" autoComplete="true" placeholder="make sure the password is 8 or more characters"/>
                         {isProperPassword !== "valid" && isProperPassword !== "unconfirmed" && <p className={style.error}>the password cant be less then 8 characters</p>}
                     </div>
-                    {status === "error" && <p className={style.error}>Either your email or password is wrong please check them and try again and if the problem continue click "Forgot your password?" link</p>}
+                    <p style={{'color':'white'}}>I dont check if you have an account but it worth seeing how good this design is</p>
                 </section>
                 <div className={style.btngroup}>
                     <a href="/">Back</a>
-                    <button type="submit" disabled={status === "sending"}>Submit</button>
+                    <button type="button">Submit</button>
                 </div>
             </section>
 
